@@ -38,18 +38,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?){
         let contactoSeleccionado = contactos[tvContactos.indexPathForSelectedRow!.row]
+        let destino = segue.destination as! EditarContactoController
+        destino.contacto = contactoSeleccionado
+        destino.callbackActualizarTVContactos = actualizarTVContactos
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Contactos"
         // Do any additional setup after loading the view.
         
         contactos.append(Contacto(nombre:"Pedro", celular: "23423", correo:"asdf@hotmail.com"))
         contactos.append(Contacto(nombre:"Juan", celular: "26583", correo:"juan@hotmail.com"))
         contactos.append(Contacto(nombre:"Ramiro", celular: "12234", correo:"ramiro@hotmail.com"))
     }
-
-
+    
+    func actualizarTVContactos() {
+        tvContactos.reloadData()
+    }
 }
 
